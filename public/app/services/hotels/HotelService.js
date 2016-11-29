@@ -1,11 +1,11 @@
 
 var hotelServiceModules = angular.module('HotelServicesModule',[]);
 
-hotelServiceModules.factory('HotelService',['$http',function($http){
+hotelServiceModules.factory('HotelService',['$http',,function($http){
     
     return {
-        getHotelRate: function(params){
-            
-        }
+        getHotelRate:[function(){
+
+        }]
     }
 }]);

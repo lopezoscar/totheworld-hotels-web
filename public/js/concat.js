@@ -4,18 +4,15 @@
 var hotelsResultsApp = angular.module('hotelsResultsApp',['resultsModule']);
 var resultsModule = angular.module('resultsModule',['app.config']);
 
-angular.module("app.config", [])
-.constant("EnvironmentConfig", {"API":"http://myproduction.com/api"});
-
 
 var hotelServiceModules = angular.module('HotelServicesModule',[]);
 
-hotelServiceModules.factory('HotelService',['$http',function($http){
+hotelServiceModules.factory('HotelService',['$http',,function($http){
     
     return {
-        getHotelRate: function(params){
-            
-        }
+        getHotelRate:[function(){
+
+        }]
     }
 }]);
 
@@ -28,16 +25,14 @@ resultsModule.directive('cluster',[function(){
         ,templateUrl:'/app/components/hotels/results/cluster/cluster.html'
         ,scope:{
 
-        }
-        ,controller: function($scope){
-
-        }
+        },
         /**
          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
          **/
-        ,link: function(scope,element,attrs){
-
-        }
+        link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
+            // Best Practice: use controller when you want to expose an API to other directives. Otherwise use link.
+            // https://docs.angularjs.org/guide/directive
+        }]
     }
 }]);
 
