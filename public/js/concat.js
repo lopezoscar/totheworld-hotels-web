@@ -27,27 +27,6 @@ hotelServiceModules.factory('HotelService',['$http','EnvironmentConfig',function
         }
     }
 }]);
-// var hotelFilters = angular.module('hotelsResultsApp');
-//
-// hotelFilters.directive('header',[function() {
-//     return {
-//         restrict:'EA'
-//
-//         ,templateUrl:'/app/components/hotels/header/header.html'
-//         ,scope:{
-//
-//         }
-//         ,controller: ['$scope', function($scope){
-//
-//         }]
-//         /**
-//          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
-//          **/
-//         ,link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
-//
-//         }]
-//     }
-// }]);
 var hotelFilters = angular.module('hotelsResultsApp');
 
 hotelFilters.directive('nav',[function() {
