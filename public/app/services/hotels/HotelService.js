@@ -1,11 +1,14 @@
 
-var hotelServiceModules = angular.module('HotelServicesModule',[]);
+var hotelServiceModules = angular.module('HotelServicesModule');
 
-hotelServiceModules.factory('HotelService',['$http',,function($http){
+hotelServiceModules.factory('HotelService',['$http','EnvironmentConfig',function($http,EnvironmentConfig){
     
     return {
-        getHotelRate:[function(){
-
-        }]
+        getHotelRate: function(){
+            return $http({
+                method:'GET',
+                url:EnvironmentConfig.api + "/v1/hotels"
+            })
+        }
     }
 }]);

@@ -13,7 +13,7 @@ gulp.task('config', function () {
         .pipe(gulpNgConfig('app.config', {
             environment: 'local'
         }))
-        .pipe(concat('./public/app/app.js'))
+        .pipe(gulp.dest('./public/app'))
 });
 
 gulp.task('config:build', function () {
@@ -21,12 +21,15 @@ gulp.task('config:build', function () {
         .pipe(gulpNgConfig('app.config', {
             environment: process.env.NODE_ENV || 'local'
         }))
-        .on('end', function(){ gutil.log('End gulpNgConfig'); })
-        .pipe(concat('./public/app/app.js'))
-        .on('end', function(){ gutil.log('End concat tgulpNgConfig'); })
-
+        .pipe(gulp.dest('./public/app'))
 });
 
+
+gulp.watch('./public/**/*.js',['js:build'], function (event) {
+    console.log('Event type: ' + event.type); // added, changed, or deleted
+    console.log('Event path: ' + event.path); // The path of the modified file
+
+});
 
 gulp.task('serve', ['config','watch'], function () {
 
@@ -34,20 +37,20 @@ gulp.task('serve', ['config','watch'], function () {
 // http://paulsalaets.com/posts/setting-angular-config-with-gulp
 // http://stackoverflow.com/questions/24591854/using-gulp-to-concatenate-and-uglify-files
 gulp.task('js:build', function () {
-    return gulp.src('./public/app/**/*.js')
+    return gulp.src(['./public/app/*.js','./public/app/**/*.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('concat.js'))
         .pipe(gulp.dest('public/js'))
         .pipe(rename('all.js'))
         .pipe(uglify())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('public/js'));
+        .pipe(gulp.dest('./public/js'));
 });
 
 // gulp.task('serve:dist', ['config:build', 'build'], function () {
 //
 // });
 
-gulp.task('build', ['config:build', 'js:build']);
+gulp.task('build', ['js:build']);
 
 gulp.task('default',['build']);

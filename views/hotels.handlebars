@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="HotelController as hotelCtrl" ng-init="hotelCtrl.init()">
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 filters">
         <ul>
             <li>5</li>
@@ -9,6 +9,9 @@
         </ul>
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clusters">
-        <cluster></cluster>
+        <div ng-repeat="hotel in hotels">
+            <cluster hotel="hotel"></cluster>
+        </div>
+
     </div>
 </div>

@@ -7,14 +7,22 @@ resultsModule.directive('cluster',[function(){
         ,replace:true
         ,templateUrl:'/app/components/hotels/results/cluster/cluster.html'
         ,scope:{
-
-        },
+            hotel:'='
+        }
+        ,controller: function($scope){
+            console.log($scope.hotel);
+        }
         /**
          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
          **/
-        link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
+        ,link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
             // Best Practice: use controller when you want to expose an API to other directives. Otherwise use link.
             // https://docs.angularjs.org/guide/directive
+
+            scope.hotel.stars.forEach( function(i) {
+                scope.stars.push(i);
+            });
+            // console.log(scope.stars);
         }]
     }
 }]);

@@ -36,11 +36,9 @@
             </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info">
-            <h2 class="hotel_name">Hanaqpacha Inn</h2>
+            <h2 class="hotel_name">[[hotel.name]]</h2>
             <p class="stars">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" ng-repeat="n in stars" aria-hidden="true"></i>
             </p>
             <p class="meal_plan">
                 <i class="fa fa-coffee" aria-hidden="true"></i>
@@ -62,7 +60,7 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 price">
             <p class="price-description">Precio por noche por habitación</p>
-            <p class="price-number">ARS 730</p>
+            <p class="price-number">ARS [[hotel.price]]</p>
             <p class="taxes">Impuestos y tasas no incluidos</p>
             <p>
                 <a href="/hotel" class="btn btn-primary btn-see-hotel">Ver hotel</a>
