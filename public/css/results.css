@@ -1,0 +1,17 @@
+
+.price-number {
+    font-weight: bold;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.btn-see-hotel {
+    background-color: #335692;
+    margin-top: 8px;
+    margin-bottom: 8px
+}
+
+.amenities {
+
+}

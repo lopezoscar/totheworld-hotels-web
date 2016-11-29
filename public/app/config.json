@@ -1,0 +1,12 @@
+{
+  "local": {
+    "__env": {
+      "API": "http://localhost:9090"
+    }
+  },
+  "production": {
+    "__env": {
+      "API": "http://myproduction.com/api"
+    }
+  }
+}

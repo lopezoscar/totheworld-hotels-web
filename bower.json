@@ -1,0 +1,21 @@
+{
+  "name": "totheworld-hotels-web",
+  "description": "Almundo ResultPage",
+  "main": "app.js",
+  "authors": [
+    "Oscar López"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Almundo",
+    "Hotels",
+    "Results"
+  ],
+  "homepage": "https://github.com/lopezoscar/totheworld-hotels-web",
+  "dependencies": {
+    "angular": "1.5.9",
+    "bootstrap": "^3.3.7",
+    "components-font-awesome": "^4.7.0",
+    "angular-route": "^1.5.9"
+  }
+}
