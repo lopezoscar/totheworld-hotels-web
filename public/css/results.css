@@ -15,7 +15,7 @@ body {
 }
 
 .price-description {
-    margin-top:5px;
+    margin:0px;
     font-size: 12px;
 }
 
@@ -66,9 +66,11 @@ body {
     text-align: center;
 }
 
+
 .price-number {
     font-size: 24px;
     color: #DF6800;
+    margin: 0px;
 }
 
 .price-number span {
@@ -77,10 +79,15 @@ body {
 
 .taxes {
     font-size: 12px;
+    margin:0;
 }
 
 .gallery {
     position: relative;
+}
+
+.pay_detail {
+    list-style-type: none;
 }
 .recommendation {
     position: absolute;
@@ -94,3 +101,6 @@ body {
     width:100%;
     padding:2.5px;
 }
+
+
+
