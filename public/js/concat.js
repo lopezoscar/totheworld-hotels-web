@@ -27,6 +27,60 @@ hotelServiceModules.factory('HotelService',['$http','EnvironmentConfig',function
         }
     }
 }]);
+// var hotelFilters = angular.module('hotelsResultsApp');
+//
+// hotelFilters.directive('header',[function() {
+//     return {
+//         restrict:'EA'
+//
+//         ,templateUrl:'/app/components/hotels/header/header.html'
+//         ,scope:{
+//
+//         }
+//         ,controller: ['$scope', function($scope){
+//
+//         }]
+//         /**
+//          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
+//          **/
+//         ,link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
+//
+//         }]
+//     }
+// }]);
+var hotelFilters = angular.module('hotelsResultsApp');
+
+hotelFilters.directive('nav',[function() {
+    return {
+        restrict:'EA'
+        ,replace:true
+        ,templateUrl:'/app/components/hotels/nav/nav.html'
+        ,scope:{
+
+        }
+        ,controller: ['$scope', function($scope){
+            $scope.menues = [
+                'Hoteles',
+                'Vuelos',
+                'Vuelo + Hotel',
+                'Paquetes',
+                'Disney',
+                'Escapadas',
+                'Seguros',
+                'Autos',
+                'Cruceros',
+                'OFERTAS',
+                'Más'
+            ]
+        }]
+        /**
+         * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
+         **/
+        ,link: ['scope', 'element', 'attrs', 'controllers', function(scope, element, attrs, controllers) {
+
+        }]
+    }
+}]);
 var resultsModule = angular.module('resultsModule');
 
 resultsModule.controller('HotelController', ['$scope', 'HotelService', function ($scope, HotelService) {
@@ -111,7 +165,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
         ,scope:{
 
         }
-        ,controller: function($scope){
+        ,controller: ['$scope',function($scope) {
             var _this = this;
             this.filter = function(hotelName) {
                 //Call to HotelService
@@ -129,7 +183,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
                     _this.filter(opts);//Cuando no hay nada y vuelvo al inicio
                 }
             }, true);
-        }
+        }]
         /**
          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
          **/

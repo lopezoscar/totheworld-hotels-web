@@ -8,7 +8,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
         ,scope:{
 
         }
-        ,controller: function($scope){
+        ,controller: ['$scope',function($scope) {
             var _this = this;
             this.filter = function(hotelName) {
                 //Call to HotelService
@@ -26,7 +26,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
                     _this.filter(opts);//Cuando no hay nada y vuelvo al inicio
                 }
             }, true);
-        }
+        }]
         /**
          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
          **/

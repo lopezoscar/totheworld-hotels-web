@@ -1,0 +1,17 @@
+
+.wrapper {
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 940px;
+}
+
+header {
+    background-color: #0d3f7e;
+    height: 80px;
+}
+
+header .logo {
+    float: left;
+    margin-top: 10px;
+}
+

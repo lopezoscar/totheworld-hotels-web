@@ -1,0 +1,31 @@
+.nav-container {
+    padding-top: 1px;
+    background-color: #164582;
+    color: #FFF;
+}
+
+.nav-container > ul li:hover {
+    background-color: #023877;
+}
+.nav-container ul {
+    text-align: center;
+}
+
+.nav-container > ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+.nav-container > ul li a {
+    display: inline-block;
+    padding: 8px 20px 8px 20px;
+    transition: 0.2s ease-in-out;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.nav-container > ul li a:hover {
+    font-weight: bold;
+    text-decoration: none;
+
+}
