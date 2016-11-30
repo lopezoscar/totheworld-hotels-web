@@ -26,18 +26,14 @@ function getToken(apikey) {
     });
 }
 
-app.get('/auth', function (req, res) {
+app.get('/', function (req, res) {
     getToken(apikey)
-        .then(function (token) {
-            res.json(token);
+        .then(function (data) {
+            res.render('hotels', {layout: 'layout',token: data.token});
         })
         .catch(function (err) {
             res.json({err: err});
         });
-});
-
-app.get('/', function (req, res) {
-    res.render('hotels', {layout: 'layout'});
 });
 
 app.use(express.static('public'));

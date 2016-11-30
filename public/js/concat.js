@@ -1,7 +1,7 @@
 'use strict';
 
 
-var hotelsResultsApp = angular.module('hotelsResultsApp',['resultsModule','HotelServicesModule','HotelFilterModule']);
+var hotelsResultsApp = angular.module('hotelsResultsApp',['resultsModule','HotelServicesModule','HotelFilterModule','ngCookies','ngRoute']);
 var resultsModule = angular.module('resultsModule',['app.config']);
 var hotelServiceModules = angular.module('HotelServicesModule',[]);
 var hotelFilters = angular.module('HotelFilterModule',[]);
@@ -10,9 +10,46 @@ hotelsResultsApp.config(['$interpolateProvider',
     function($interpolateProvider) {
         $interpolateProvider.startSymbol('[[').endSymbol(']]');
     }]);
+
+hotelsResultsApp.run(["$rootScope","$cookies", function ($rootScope,$cookies) {
+
+    // AuthService.auth().then(function (result) {
+        $cookies.put('token',window.token);//TODO Check if the token exists and it is correct.
+    // }, function (err) {
+    //     console.log("No se encuentra al usuario", err);
+    // });
+
+}]);
+//
+hotelsResultsApp.factory('httpRequestInterceptor', ["$cookies", function ($cookies) {
+    return {
+        request: function (config) {
+            config.headers['Authorization'] = $cookies.get('token');
+            return config;
+        }
+    };
+}]);
+
+hotelsResultsApp.config(['$routeProvider', '$locationProvider', "$httpProvider", function ($routeProvider, $locationProvider, $httpProvider) {
+    $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+}]);
 angular.module("app.config", [])
 .constant("EnvironmentConfig", {"api":"http://localhost:9090"});
 
+var hotelServiceModules = angular.module('HotelServicesModule');
+
+hotelServiceModules.factory('AuthService',['$http','EnvironmentConfig',function($http,EnvironmentConfig){
+
+    return {
+        auth: function(){
+            return $http({
+                method:'GET',
+                url:"/v2/auth"
+            });
+        }
+    }
+}]);
 
 var hotelServiceModules = angular.module('HotelServicesModule');
 
@@ -65,68 +102,15 @@ var resultsModule = angular.module('resultsModule');
 resultsModule.controller('HotelController', ['$scope', 'HotelService', function ($scope, HotelService) {
 
     this.getHotelRate = function () {
-        $scope.hotels = [
-            {
-                "_id": 1,
-                "name": "Hotel Emperador",
-                "stars": "3",
-                "price": "1596"
-            },
-            {
-                "_id": 2,
-                "name": "Petit Palace San Bernardo",
-                "stars": "4",
-                "price": "2145"
-            },
-            {
-                "_id": 3,
-                "name": "Hotel Nuevo Boston",
-                "stars": "2",
-                "price": "861"
-            }
-        ];
-
-        // HotelService.getHotelRate()
-        //     .then(function (result) {
-        //         console.log(result);
-        //         $scope.hotels = [
-        //             {
-        //                 "name": "Hotel Emperador",
-        //                 "stars": "3",
-        //                 "price": "1596"
-        //             },
-        //             {
-        //                 "name": "Petit Palace San Bernardo",
-        //                 "stars": "4",
-        //                 "price": "2145"
-        //             },
-        //             {
-        //                 "name": "Hotel Nuevo Boston",
-        //                 "stars": "2",
-        //                 "price": "861"
-        //             }
-        //         ];
-        //     })
-        //     .catch(function (err) {
-        //         console.log(err);
-        //         $scope.hotels = [
-        //             {
-        //                 "name": "Hotel Emperador",
-        //                 "stars": "3",
-        //                 "price": "1596"
-        //             },
-        //             {
-        //                 "name": "Petit Palace San Bernardo",
-        //                 "stars": "4",
-        //                 "price": "2145"
-        //             },
-        //             {
-        //                 "name": "Hotel Nuevo Boston",
-        //                 "stars": "2",
-        //                 "price": "861"
-        //             }
-        //         ];
-        //     })
+        
+        HotelService.getHotelRate()
+            .then(function (result) {
+                console.log(result);
+                $scope.hotels = result.data.hotels || [];
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
     };
 
     this.init = function () {
