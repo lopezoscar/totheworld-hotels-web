@@ -10,6 +10,13 @@ const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
 function getToken(apikey) {
     return new Promise(function (resolve, reject) {
         request({
