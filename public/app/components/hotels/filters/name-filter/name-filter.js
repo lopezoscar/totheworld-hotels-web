@@ -10,7 +10,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
         }
         ,controller: ['$scope',function($scope) {
             var _this = this;
-            this.filter = function(hotelName) {
+            this.filter = function() {
                 //Call to HotelService
             }
 

@@ -27,12 +27,13 @@ function getToken(apikey) {
 }
 
 app.get('/', function (req, res) {
+    //TODO call getToken once
     getToken(apikey)
         .then(function (data) {
             res.render('hotels', {layout: 'layout',token: data.token});
         })
         .catch(function (err) {
-            res.json({err: err});
+            res.render('hotels', {layout: 'layout',token: ''});
         });
 });
 

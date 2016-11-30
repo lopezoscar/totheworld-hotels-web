@@ -37,19 +37,6 @@ hotelsResultsApp.config(['$routeProvider', '$locationProvider', "$httpProvider",
 angular.module("app.config", [])
 .constant("EnvironmentConfig", {"api":"http://localhost:9090"});
 
-var hotelServiceModules = angular.module('HotelServicesModule');
-
-hotelServiceModules.factory('AuthService',['$http','EnvironmentConfig',function($http,EnvironmentConfig){
-
-    return {
-        auth: function(){
-            return $http({
-                method:'GET',
-                url:"/v2/auth"
-            });
-        }
-    }
-}]);
 
 var hotelServiceModules = angular.module('HotelServicesModule');
 
@@ -130,7 +117,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
         }
         ,controller: ['$scope',function($scope) {
             var _this = this;
-            this.filter = function(hotelName) {
+            this.filter = function() {
                 //Call to HotelService
             }
 
@@ -158,7 +145,7 @@ hotelFilters.directive('nameFilter',['HotelService',function(HotelService) {
 
 var resultsModule = angular.module('resultsModule');
 
-resultsModule.directive('cluster',[function(){
+resultsModule.directive('cluster',function(){
     return {
         restrict:'E'
         ,replace:true
@@ -166,14 +153,14 @@ resultsModule.directive('cluster',[function(){
         ,scope:{
             hotel:'='
         }
-        ,controller: function($scope){
+        ,controller: ['$scope',function($scope){
             console.log($scope.hotel);
             $scope.stars = [];
             for(var i = 0; i < $scope.hotel.stars; i++){
                 $scope.stars.push(i);
             }
 
-        }
+        }]
         /**
          * http://stackoverflow.com/questions/15676614/directive-link-vs-compile-vs-controller
          **/
@@ -189,5 +176,5 @@ resultsModule.directive('cluster',[function(){
             // console.log(scope.stars);
         }]
     }
-}]);
+});
 
