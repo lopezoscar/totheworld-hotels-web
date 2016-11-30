@@ -35,7 +35,7 @@ hotelsResultsApp.config(['$routeProvider', '$locationProvider', "$httpProvider",
     $httpProvider.interceptors.push('httpRequestInterceptor');
 }]);
 angular.module("app.config", [])
-.constant("EnvironmentConfig", {"api":"http://localhost:9090"});
+.constant("EnvironmentConfig", {"api":"http://api.almundo.com"});
 
 
 var hotelServiceModules = angular.module('HotelServicesModule');
@@ -50,27 +50,6 @@ hotelServiceModules.factory('HotelService',['$http','EnvironmentConfig',function
             })
         }
     }
-}]);
-var resultsModule = angular.module('resultsModule');
-
-resultsModule.controller('HotelController', ['$scope', 'HotelService', function ($scope, HotelService) {
-
-    this.getHotelRate = function () {
-        
-        HotelService.getHotelRate()
-            .then(function (result) {
-                console.log(result);
-                $scope.hotels = result.data.hotels || [];
-            })
-            .catch(function (err) {
-                console.log(err);
-            })
-    };
-
-    this.init = function () {
-        this.getHotelRate();
-    }
-
 }]);
 var hotelFilters = angular.module('hotelsResultsApp');
 
@@ -104,6 +83,27 @@ hotelFilters.directive('nav',[function() {
 
         }]
     }
+}]);
+var resultsModule = angular.module('resultsModule');
+
+resultsModule.controller('HotelController', ['$scope', 'HotelService', function ($scope, HotelService) {
+
+    this.getHotelRate = function () {
+        
+        HotelService.getHotelRate()
+            .then(function (result) {
+                console.log(result);
+                $scope.hotels = result.data.hotels || [];
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    };
+
+    this.init = function () {
+        this.getHotelRate();
+    }
+
 }]);
 var hotelFilters = angular.module('HotelFilterModule');
 

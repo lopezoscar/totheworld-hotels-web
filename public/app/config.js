@@ -1,2 +1,2 @@
 angular.module("app.config", [])
-.constant("EnvironmentConfig", {"api":"http://localhost:9090"});
+.constant("EnvironmentConfig", {"api":"http://api.almundo.com"});

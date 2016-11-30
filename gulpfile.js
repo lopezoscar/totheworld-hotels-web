@@ -19,7 +19,7 @@ gulp.task('config', function () {
 gulp.task('config:build', function () {
     gulp.src('./public/app/config.json')
         .pipe(gulpNgConfig('app.config', {
-            environment: process.env.NODE_ENV || 'local'
+            environment: 'production'
         }))
         .pipe(gulp.dest('./public/app'))
 });
@@ -51,6 +51,6 @@ gulp.task('js:build', function () {
 //
 // });
 
-gulp.task('build', ['js:build']);
+gulp.task('build', ['js:build','config:build']);
 
 gulp.task('default',['build']);
